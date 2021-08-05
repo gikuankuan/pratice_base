@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set("Aisa/Taipei");
+date_default_timezone_set("Asia/Taipei");
 session_start();
 
 class DB{
@@ -79,8 +79,11 @@ class DB{
     public function save($arg){
         //更新
         if(!empty($arg['id'])){
-            foreach($arg != 'id'){
-                $tmp[] = sprintf("`%s` = '%s' ,$key.$value");
+            foreach($arg as $key => $value ){
+                if($key != 'id'){
+
+                    $tmp[] = sprintf("`%s` = '%s' ,$key.$value");
+                }
             }
 
             $sql = "update $this->table set" . implode(",",$tmp) . "where `id` ='". $arg['id'] ."'";
